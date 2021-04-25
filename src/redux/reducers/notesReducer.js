@@ -1,3 +1,4 @@
+import { types } from 'sass';
 import { notesTypes } from '../types/notesTypes';
 
 /**
@@ -23,6 +24,10 @@ export const notesReducer = (state = initialState, action) => {
         ...state,
         notes: [...action.payload],
       };
+
+    case types.NOTES_ADD_NOTE:
+      return { ...state, notes: [action.payload, ...state.notes] };
+
     case notesTypes.NOTES_UPDATE:
       return {
         ...state,
@@ -30,7 +35,15 @@ export const notesReducer = (state = initialState, action) => {
           note.id === action.payload.id ? action.payload.note : note
         ),
       };
+    case notesTypes.NOTES_REMOVE_NOTE:
+      return {
+        ...state,
+        active: null,
+        notes: state.notes.filter((note) => note.id !== action.payload),
+      };
 
+    case notesTypes.NOTES_LOGOUT_CLEAN:
+      return initialState;
     default:
       return state;
   }

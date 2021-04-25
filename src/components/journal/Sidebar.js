@@ -1,6 +1,9 @@
 import { useDispatch, useSelector } from 'react-redux';
 import { logoutAsyncAction } from '../../redux/actions/authActions';
-import { startNewNoteAction } from '../../redux/actions/notesActions';
+import {
+  cleanLogoutAction,
+  startNewNoteAction,
+} from '../../redux/actions/notesActions';
 import JournalEntries from './JournalEntries';
 
 const Sidebar = () => {
@@ -9,6 +12,7 @@ const Sidebar = () => {
 
   const handleLogOut = () => {
     dispatch(logoutAsyncAction());
+    dispatch(cleanLogoutAction());
   };
 
   const handleAddNew = () => {

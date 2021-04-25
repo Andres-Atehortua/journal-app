@@ -34,7 +34,6 @@ const RegisterScreen = () => {
       dispatch(setErrorAction('Name is required.'));
       return false;
     } else if (!validator.isEmail(email)) {
-      console.log();
       dispatch(setErrorAction('El email es necesario'));
 
       return false;
@@ -51,7 +50,6 @@ const RegisterScreen = () => {
 
       return false;
     } else if (password.trim() !== password2.trim()) {
-      console.log('Las contraseñas deben coincidir');
       dispatch(setErrorAction('Las contraseñas deben coincidir'));
 
       return false;
