@@ -1,4 +1,3 @@
-import { types } from 'sass';
 import { notesTypes } from '../types/notesTypes';
 
 /**
@@ -25,7 +24,7 @@ export const notesReducer = (state = initialState, action) => {
         notes: [...action.payload],
       };
 
-    case types.NOTES_ADD_NOTE:
+    case notesTypes.NOTES_ADD_NOTE:
       return { ...state, notes: [action.payload, ...state.notes] };
 
     case notesTypes.NOTES_UPDATE:

@@ -10,7 +10,10 @@ const JournalEntry = ({ id, title, body, date, url }) => {
   };
 
   return (
-    <div onClick={handleEdit} className='journal__entry'>
+    <div
+      className=' journal__entry animate__animated animate__fadeInLeft'
+      onClick={handleEdit}
+    >
       {url && (
         <div
           className='journal__entry-picture'
