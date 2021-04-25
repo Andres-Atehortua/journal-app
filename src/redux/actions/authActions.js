@@ -45,6 +45,7 @@ export const startGoogleLogin = () => async (dispatch) => {
     const { user } = await firebase.auth().signInWithPopup(googleAuthProvider);
 
     dispatch(loginAction(user.uid, user.displayName));
+    dispatch(finishLoadingAction());
   } catch (error) {
     dispatch(finishLoadingAction());
 

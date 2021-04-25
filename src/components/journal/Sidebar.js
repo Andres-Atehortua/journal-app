@@ -1,13 +1,18 @@
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { logoutAsyncAction } from '../../redux/actions/authActions';
+import { startNewNoteAction } from '../../redux/actions/notesActions';
 import JournalEntries from './JournalEntries';
-// import firebase  from "../../firebase/firebaseConfig"
 
 const Sidebar = () => {
   const dispatch = useDispatch();
+  const { name } = useSelector((state) => state.auth);
 
   const handleLogOut = () => {
     dispatch(logoutAsyncAction());
+  };
+
+  const handleAddNew = () => {
+    dispatch(startNewNoteAction());
   };
 
   return (
@@ -15,14 +20,14 @@ const Sidebar = () => {
       <div className='journal__sidebar-navbar'>
         <h3 className='mt-5'>
           <i className='far fa-moon'></i>
-          <span>Andrés</span>
+          <span>{name}</span>
         </h3>
 
         <button onClick={handleLogOut} className='btn'>
           Logout
         </button>
       </div>
-      <div className='journal__new-entry'>
+      <div onClick={handleAddNew} className='journal__new-entry'>
         <i className='far fa-calendar-plus fa-5x'></i>
         <p className='mt-5'>New entry</p>
       </div>

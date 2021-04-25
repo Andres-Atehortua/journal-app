@@ -8,6 +8,7 @@ import AuthRouter from './AuthRouter';
 import JournalScreen from '../components/journal/JournalScreen';
 import PublicRoutes from './PublicRoutes';
 import PrivateRoutes from './PrivateRoutes';
+import { startLoadingNotesAction } from '../redux/actions/notesActions';
 
 const AppRouter = () => {
   const dispatch = useDispatch();
@@ -16,9 +17,14 @@ const AppRouter = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
 
   useEffect(() => {
-    firebase.auth().onAuthStateChanged((user) => {
-      user && dispatch(loginAction(user.uid, user.displayName));
-      user ? setIsLoggedIn(true) : setIsLoggedIn(false);
+    firebase.auth().onAuthStateChanged(async (user) => {
+      if (user) {
+        dispatch(loginAction(user.uid, user.displayName));
+        setIsLoggedIn(true);
+        dispatch(startLoadingNotesAction(user.uid));
+      } else {
+        setIsLoggedIn(false);
+      }
       setChecking(false);
     });
   }, [dispatch]);
@@ -26,6 +32,7 @@ const AppRouter = () => {
   return (
     <>
       {checking ? (
+        //TODO: Buscar spiner
         <h1>Cargando...</h1>
       ) : (
         <Router>

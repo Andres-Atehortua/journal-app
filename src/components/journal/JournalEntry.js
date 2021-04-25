@@ -1,17 +1,29 @@
-const JournalEntry = () => {
+import { useDispatch } from 'react-redux';
+import { days } from '../../helpers/daysAndMonths';
+import { setActiveNoteAction } from '../../redux/actions/notesActions';
+
+const JournalEntry = ({ id, title, body, date, url }) => {
+  const dispatch = useDispatch();
+
+  const handleEdit = () => {
+    dispatch(setActiveNoteAction(id, { title, body, date, url }));
+  };
+
   return (
-    <div className='journal__entry'>
-      <div className='journal__entry-picture'></div>
+    <div onClick={handleEdit} className='journal__entry'>
+      {url && (
+        <div
+          className='journal__entry-picture'
+          style={{ backgroundImage: `url(${url})` }}
+        ></div>
+      )}
       <div className='journal__entry-body'>
-        <p className='journal__entry-title'>Un nuevo dia arhhh</p>
-        <p className='journal__entry-content'>
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Dignissimos,
-          beatae!
-        </p>
+        <p className='journal__entry-title'>{title}</p>
+        <p className='journal__entry-content'>{body}</p>
       </div>
       <div className='journal__entry-date-box'>
-        <span>Monday</span>
-        <h4>28</h4>
+        <span>{days[new Date(date).getDay()]}</span>
+        <h4>{new Date(date).getDate()}</h4>
       </div>
     </div>
   );
