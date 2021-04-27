@@ -1,14 +1,10 @@
 import { Provider } from 'react-redux';
-import { MemoryRouter } from 'react-router';
 import Sidebar from '../../../components/journal/Sidebar';
 import { mount } from 'enzyme';
 import configureStore from 'redux-mock-store';
 import thunk from 'redux-thunk';
 import { logoutAsyncAction } from '../../../redux/actions/authActions';
-import {
-  startNewNoteAction,
-  cleanLogoutAction,
-} from '../../../redux/actions/notesActions';
+import { startNewNoteAction } from '../../../redux/actions/notesActions';
 
 jest.mock('../../../redux/actions/authActions', () => ({
   logoutAsyncAction: jest.fn(),
