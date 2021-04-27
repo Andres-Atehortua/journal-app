@@ -23,6 +23,13 @@ const store = mockStore({
   auth: {
     uid: '123-456',
   },
+  notes: {
+    active: {
+      id: 'IKm1XS4fHMZuMZ4H7PZ3',
+      title: 'hola',
+      body: 'hey',
+    },
+  },
 });
 
 describe('Testing notesActions', () => {
